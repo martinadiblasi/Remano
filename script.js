@@ -95,7 +95,7 @@ if (contactForm) {
         // Simulate form submission (replace with actual form handling)
         setTimeout(() => {
             // Show success message
-            showNotification('Messaggio inviato con successo! Ti contatteremo presto.', 'success');
+            showNotification('Message sent successfully! We will contact you soon.', 'success');
             
             // Reset form
             this.reset();
@@ -186,30 +186,6 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Enhanced Floating Animation for Hero Cards
-document.addEventListener('DOMContentLoaded', () => {
-    const floatingCards = document.querySelectorAll('.floating-card');
-    
-    floatingCards.forEach((card, index) => {
-        // Add random delay and duration variations
-        const delay = Math.random() * 2;
-        const duration = 4 + Math.random() * 4;
-        
-        card.style.animationDelay = `${delay}s`;
-        card.style.animationDuration = `${duration}s`;
-        
-        // Add hover effect
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-10px) scale(1.05)';
-            card.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-            card.style.boxShadow = '';
-        });
-    });
-});
 
 // Add mobile menu styles dynamically
 const mobileMenuStyles = `
@@ -312,7 +288,7 @@ const statsObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const statsSection = document.querySelector('.chi-siamo');
+    const statsSection = document.querySelector('.about-us');
     if (statsSection) {
         statsObserver.observe(statsSection);
     }
