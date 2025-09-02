@@ -80,6 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // Contact Form Handling
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
+    // Initialize EmailJS
+    emailjs.init('SySwD4OYMJWORSgvD');
+    
     // Add mobile-specific enhancements
     const inputs = contactForm.querySelectorAll('input, textarea');
     const submitBtn = contactForm.querySelector('button[type="submit"]');
@@ -121,7 +124,7 @@ if (contactForm) {
         submitBtn.style.transform = '';
     });
     
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         // Enhanced loading animation
@@ -138,8 +141,19 @@ if (contactForm) {
         contactForm.style.opacity = '0.7';
         contactForm.style.pointerEvents = 'none';
         
-        // Simulate form submission
-        setTimeout(() => {
+        // Prepare form data for EmailJS
+        const formData = new FormData(this);
+        const templateParams = {
+            from_name: formData.get('from_name'),
+            from_email: formData.get('from_email'),
+            subject: formData.get('subject'),
+            message: formData.get('message')
+        };
+        
+        try {
+            // Send email with EmailJS
+            await emailjs.send('service_4g3jyy9', 'template_mqwd4tf', templateParams);
+            
             // Show success message
             showNotification('✅ Messaggio inviato con successo! Ti contatteremo presto.', 'success');
             
@@ -154,14 +168,21 @@ if (contactForm) {
             submitBtn.innerHTML = 'Messaggio Inviato ✓';
             submitBtn.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
             
-            setTimeout(() => {
-                submitBtn.innerHTML = 'Send Message';
-                submitBtn.disabled = false;
-                submitBtn.style.background = '';
-                contactForm.style.opacity = '';
-                contactForm.style.pointerEvents = '';
-            }, 2000);
-            
+        } catch (error) {
+            console.error('EmailJS Error:', error);
+            // Show error message
+            showNotification('❌ Errore nell\'invio. Riprova più tardi.', 'error');
+            submitBtn.innerHTML = 'Riprova';
+            submitBtn.style.background = 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)';
+        }
+        
+        // Reset UI after 2 seconds
+        setTimeout(() => {
+            submitBtn.innerHTML = 'Send Message';
+            submitBtn.disabled = false;
+            submitBtn.style.background = '';
+            contactForm.style.opacity = '';
+            contactForm.style.pointerEvents = '';
         }, 2000);
     });
     

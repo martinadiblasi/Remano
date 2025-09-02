@@ -171,14 +171,14 @@
             <div class="contact-content">
                 <form class="contact-form">
                     <div class="form-group">
-                        <input type="text" placeholder="Name" required>
-                        <input type="email" placeholder="Email" required>
+                        <input type="text" name="from_name" placeholder="Name" required>
+                        <input type="email" name="from_email" placeholder="Email" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Subject" required>
+                        <input type="text" name="subject" placeholder="Subject" required>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Message" rows="6" required></textarea>
+                        <textarea name="message" placeholder="Message" rows="6" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Send Message</button>
                 </form>
@@ -224,6 +224,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
